@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Practica2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Vehiculos">
+    <Key>
+      <PropertyRef Name="IdVehiculo" />
+    </Key>
+    <Property Name="IdVehiculo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Marca" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Modelo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Color" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IdVendedor" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Vendedores" Relationship="Self.FK_Vehiculos_Vendedores" FromRole="Vehiculos" ToRole="Vendedores" />
+  </EntityType>
+  <EntityType Name="Vendedores">
+    <Key>
+      <PropertyRef Name="IdVendedor" />
+    </Key>
+    <Property Name="IdVendedor" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cedula" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Estado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Vehiculos" Relationship="Self.FK_Vehiculos_Vendedores" FromRole="Vendedores" ToRole="Vehiculos" />
+  </EntityType>
+  <Association Name="FK_Vehiculos_Vendedores">
+    <End Role="Vendedores" Type="Self.Vendedores" Multiplicity="1" />
+    <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendedores">
+        <PropertyRef Name="IdVendedor" />
+      </Principal>
+      <Dependent Role="Vehiculos">
+        <PropertyRef Name="IdVendedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Practica2Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Vehiculos" EntityType="Self.Vehiculos" />
+    <EntitySet Name="Vendedores" EntityType="Self.Vendedores" />
+    <AssociationSet Name="FK_Vehiculos_Vendedores" Association="Self.FK_Vehiculos_Vendedores">
+      <End Role="Vendedores" EntitySet="Vendedores" />
+      <End Role="Vehiculos" EntitySet="Vehiculos" />
+    </AssociationSet>
+    <FunctionImport Name="RegistrarVendedor">
+      <Parameter Name="Cedula" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Correo" Mode="In" Type="String" />
+      <Parameter Name="Estado" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="VerificarCedula">
+      <Parameter Name="Cedula" Mode="In" Type="String" />
+      <Parameter Name="Existe" Mode="InOut" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="verificarCedula1" ReturnType="Collection(Int32)">
+      <Parameter Name="Cedula" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="InsertarVehiculo">
+      <Parameter Name="Marca" Mode="In" Type="String" />
+      <Parameter Name="Modelo" Mode="In" Type="String" />
+      <Parameter Name="Color" Mode="In" Type="String" />
+      <Parameter Name="Precio" Mode="In" Type="Decimal" />
+      <Parameter Name="Vendedor" Mode="In" Type="Int64" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

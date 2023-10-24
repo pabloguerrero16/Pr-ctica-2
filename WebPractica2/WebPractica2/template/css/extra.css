@@ -1,0 +1,78 @@
+﻿.imagen {
+    display: block;
+    position: relative;
+    background-image: url('../images/vendedores.jpg');
+    background-position: center;
+    filter: brightness(100%);
+    background-size: cover;
+    overflow: hidden;
+    height: 500px;
+    z-index: 100;
+    margin-top: 86px;
+    margin-bottom: 40px;
+}
+
+.imagen2 {
+    display: block;
+    position: relative;
+    background-image: url('../images/carros1.jpg');
+    background-position: center;
+    filter: brightness(100%);
+    background-size: cover;
+    overflow: hidden;
+    height: 500px;
+    z-index: 100;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+.imagen3 {
+    display: block;
+    position: relative;
+    background-image: url('../images/carros2.jpg');
+    background-position: center;
+    filter: brightness(100%);
+    background-size: cover;
+    overflow: hidden;
+    height: 500px;
+    z-index: 100;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    transform: translate(-50%, -50%);
+}
+
+    .container h1 {
+        margin: 0;
+        font-size: 70px;
+    }
+
+        .container h1 span {
+            border: 6px solid white;
+            padding: 6px 14px;
+            display: inline-block;
+        }
+
+.cen {
+    margin: 20px;
+    display: block;
+    font-size: 26px;
+}
+
+.boton {
+    color: #313131;
+    padding: 10px 24px;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: 0.3s;
+    background: #fff;
+}

@@ -1,0 +1,55 @@
+﻿@model WebPractica2.Entities.VendedorEnt
+
+@{
+    ViewBag.Title = "Vendedores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Registrar Vendedor</h4>
+
+            @if (TempData["Exito"] != null)
+            {
+                <div class="alert alert-success" role="alert" style="text-align:center">
+                    @TempData["Exito"]
+                </div>
+            }
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger" role="alert" style="text-align:center">
+                    @TempData["Error"]
+                </div>
+            }
+
+            @using (Html.BeginForm("Vendedores", "Home", FormMethod.Post, new { @class = "forms-sample" }))
+            {
+                <div class="form-group">
+                    <label for="exampleInputUsername1">Cédula</label>
+                    @Html.TextBoxFor(m => m.Cedula, new { @class = "form-control", @type = "text", @placeholder = "Cédula" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Nombre</label>
+                    @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", @type = "text", @placeholder = "Nombre" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Correo</label>
+                    @Html.TextBoxFor(m => m.Correo, new { @class = "form-control", @type = "text", @placeholder = "Correo" })
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Estado</label>
+                    @Html.DropDownListFor(m => m.Estado, ViewBag.Estados as List<SelectListItem>, new { @class = "form-control", @placeholder = "Vendedor" })
+                </div>
+
+                <button type="submit" class="btn btn-primary me-2">Registrar</button>
+                <a class="btn btn-light" href="@Url.Action("Index", "Home")">Salir</a>
+            }
+
+
+        </div>
+    </div>
+</div>
+
